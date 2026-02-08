@@ -53,18 +53,22 @@ super-historias/
 ├── api.py                 # Backend FastAPI com SSE
 ├── requirements.txt       # Dependências Python
 ├── src/
-│   ├── App.jsx           # Componente principal
+│   ├── App.tsx           # Componente principal
 │   ├── App.css           # Estilos do App
 │   ├── index.css         # Design system global
+│   ├── types/            # Tipagens TypeScript
+│   ├── hooks/            # Custom hooks (useCharacters, useStories)
+│   ├── utils/            # Funções utilitárias
+│   ├── constants/        # Constantes (universos, configurações)
 │   └── components/
-│       ├── Header.jsx/.css         # Cabeçalho com login
-│       ├── CharacterCard.jsx/.css  # Card de personagem
-│       ├── CreateCharacter.jsx/.css # Formulário de criação
-│       ├── CreateStory.jsx/.css    # Wizard de história
-│       ├── UniverseSelector.jsx/.css # Seletor de universos
-│       ├── StoryProgress.jsx/.css  # Progresso em tempo real
-│       ├── StoryViewer.jsx/.css    # Visualizador final
-│       └── Modal.jsx/.css          # Modal reutilizável
+│       ├── Header.tsx/.css         # Cabeçalho
+│       ├── CharacterCard.tsx/.css  # Card de personagem
+│       ├── CreateCharacter.tsx/.css # Formulário de criação
+│       ├── CreateStory.tsx/.css    # Wizard de história
+│       ├── UniverseSelector.tsx/.css # Seletor de universos
+│       ├── StoryProgress.tsx/.css  # Progresso em tempo real
+│       ├── StoryViewer.tsx/.css    # Visualizador final
+│       └── Modal.tsx/.css          # Modal reutilizável
 ```
 
 ## 🔧 Endpoints da API
