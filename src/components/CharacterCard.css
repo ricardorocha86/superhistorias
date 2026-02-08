@@ -1,0 +1,185 @@
+/* ========================================
+   CharacterCard Component
+   v2.0 - Production Ready
+======================================== */
+
+.character-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    border: 2px solid hsla(var(--primary-hue), 30%, 40%, 0.2);
+    backdrop-filter: blur(20px);
+    transition: all var(--transition-normal);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+@media (min-width: 640px) {
+    .character-card {
+        padding: var(--space-xl);
+        gap: var(--space-lg);
+    }
+}
+
+.character-card:hover {
+    transform: translateY(-4px);
+    border-color: hsla(var(--primary-hue), 50%, 50%, 0.4);
+    box-shadow: var(--shadow-lg);
+}
+
+.character-card.selectable {
+    cursor: pointer;
+}
+
+.character-card.selectable:focus-visible {
+    box-shadow: var(--focus-ring);
+    outline: none;
+}
+
+.character-card.selected {
+    border-color: var(--accent-gold);
+    box-shadow: var(--shadow-glow-gold);
+    background: hsla(42, 50%, 20%, 0.3);
+}
+
+/* Images Stack */
+.character-images {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 640px) {
+    .character-images {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+.character-image-thumb {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-md);
+    background-size: cover;
+    background-position: center;
+    box-shadow: var(--shadow-md);
+    border: 3px solid white;
+    transition: transform var(--transition-normal);
+}
+
+@media (min-width: 640px) {
+    .character-image-thumb {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.character-card:hover .character-image-thumb:nth-child(1) {
+    transform: rotate(-15deg) translateX(-10px) !important;
+}
+
+.character-card:hover .character-image-thumb:nth-child(2) {
+    transform: rotate(0deg) scale(1.05) !important;
+}
+
+.character-card:hover .character-image-thumb:nth-child(3) {
+    transform: rotate(15deg) translateX(10px) !important;
+}
+
+/* Character Info */
+.character-info {
+    text-align: center;
+    min-width: 0;
+    width: 100%;
+}
+
+.character-name {
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.character-photos-count {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+/* Selected Badge */
+.character-selected-badge {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    width: 28px;
+    height: 28px;
+    background: var(--gradient-gold);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--text-inverse);
+    animation: scaleIn 0.3s var(--transition-bounce);
+    font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+    .character-selected-badge {
+        width: 32px;
+        height: 32px;
+        top: var(--space-md);
+        right: var(--space-md);
+    }
+}
+
+/* Delete Button */
+.character-delete-btn {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: hsla(0, 70%, 50%, 0.8);
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Always show delete button on touch devices */
+@media (hover: none) {
+    .character-delete-btn {
+        opacity: 0.8;
+    }
+}
+
+.character-card:hover .character-delete-btn {
+    opacity: 1;
+}
+
+.character-delete-btn:hover {
+    background: hsl(0, 70%, 45%);
+    transform: scale(1.1);
+}
+
+.character-delete-btn:focus-visible {
+    opacity: 1;
+    box-shadow: var(--focus-ring);
+}

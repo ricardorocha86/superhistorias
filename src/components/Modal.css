@@ -1,0 +1,26 @@
+/* ========================================
+   Modal Component
+   v2.0 - Production Ready
+======================================== */
+
+/* Note: Most modal styles are in index.css
+   This file contains component-specific overrides */
+
+/* Ensure modal content doesn't inherit unwanted styles */
+.modal-body>* {
+    animation: none;
+}
+
+/* Better scrolling behavior */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: hsla(var(--primary-hue), 50%, 50%, 0.5);
+    border-radius: var(--radius-full);
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}

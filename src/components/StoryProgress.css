@@ -1,0 +1,407 @@
+/* ========================================
+   StoryProgress Component - Asymmetric Dashboard
+   v5.0 - Cover Lead + Storyboard
+======================================== */
+
+.story-progress {
+    min-height: calc(100vh - 80px);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1400px;
+    /* Largura maior para acomodar o grid de 6 colunas */
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease;
+    gap: var(--space-2xl);
+}
+
+/* ========================================
+   Top Section: Status Dashboard
+======================================== */
+.progress-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl) var(--space-2xl);
+    width: 100%;
+    border: 1px solid hsla(var(--primary-hue), 30%, 40%, 0.3);
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Timer Flutuante - Restaurado e Destacado */
+/* Timer Flutuante - Restaurado e Destacado */
+.global-timer {
+    position: fixed;
+    top: 90px;
+    right: var(--space-xl);
+    background: rgba(10, 10, 20, 0.8);
+    backdrop-filter: blur(12px);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-full);
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    font-weight: 700;
+    border: 1px solid var(--primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    letter-spacing: 0.05em;
+}
+
+.stage-timer {
+    color: var(--accent-gold);
+    font-weight: 700;
+    margin-left: var(--space-xs);
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.timer-icon {
+    color: var(--accent-gold);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.progress-title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-xs);
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.progress-message {
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+    margin-bottom: var(--space-xl);
+    min-height: 1.5em;
+    font-weight: 400;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: var(--space-xl);
+}
+
+.progress-bar {
+    height: 6px;
+    background: var(--bg-glass-strong);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-xs);
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-percent {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-weight: 600;
+    display: block;
+    text-align: right;
+}
+
+/* Stages - Compact Horizontal */
+.stages-grid {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-md);
+}
+
+.stage-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-full);
+    background: transparent;
+    opacity: 0.4;
+    transition: all var(--transition-normal);
+    border: 1px solid transparent;
+}
+
+.stage-item.active {
+    opacity: 1;
+    background: var(--bg-glass);
+    border-color: var(--primary);
+}
+
+.stage-item.completed {
+    opacity: 0.7;
+}
+
+.stage-icon {
+    font-size: 1rem;
+}
+
+.stage-name {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Cancel Button */
+.cancel-btn {
+    position: absolute;
+    top: var(--space-lg);
+    left: var(--space-lg);
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-muted);
+    padding: 6px 16px;
+    font-size: var(--text-xs);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.cancel-btn:hover {
+    border-color: var(--accent-red);
+    color: var(--accent-red);
+    background: rgba(255, 0, 0, 0.1);
+}
+
+/* ========================================
+   Bottom Section: Visual Storyboard (6 Columns)
+======================================== */
+.images-preview-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.preview-section-title {
+    display: none;
+    /* Layout auto-explicativo */
+}
+
+/* Container do Grid Principal */
+.generation-grid-container {
+    display: grid;
+    /* Coluna 1 (Capa): 2fr (Wide) | Colunas 2-6 (Cenas): 1fr */
+    grid-template-columns: 2fr repeat(5, 1fr);
+    gap: var(--space-lg);
+    width: 100%;
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .generation-grid-container {
+        /* Mobile/Tablet: Stack vertical ou 2 colunas */
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Capa ocupa largura total no mobile */
+    .cover-wrapper {
+        grid-column: 1 / -1;
+        justify-self: center;
+        max-width: 500px;
+    }
+}
+
+/* -------------------------------------
+   Coluna 1: Capa (Cover Wrapper) 
+------------------------------------- */
+.cover-wrapper {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    border: 1px solid hsla(var(--primary-hue), 30%, 40%, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    /* height: 100%; REMOVIDO para evitar esticamento excessivo */
+}
+
+.part-preview {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-sm);
+    border: 1px solid hsla(var(--primary-hue), 30%, 40%, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    transition: all var(--transition-normal);
+}
+
+.part-preview.generating {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.part-image-container {
+    width: 100%;
+    aspect-ratio: 1;
+    /* Quadrada por padrão */
+    background: var(--bg-glass);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.part-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.part-preview:hover img {
+    transform: scale(1.1);
+}
+
+.part-number {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-weight: 600;
+    text-align: center;
+    margin-top: var(--space-xs);
+}
+
+.cover-preview-card {
+    width: 100%;
+    /* Aspect ratio de Capa (Wide 3:2) */
+    aspect-ratio: 3/2;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    background: var(--bg-glass);
+}
+
+.cover-preview-card.generating {
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 0 20px rgba(var(--accent-gold-rgb), 0.2);
+}
+
+.cover-image-container {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            rgba(30, 30, 40, 0.8) 25%,
+            rgba(60, 50, 30, 0.4) 50%,
+            rgba(30, 30, 40, 0.8) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 4s infinite linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(255, 215, 0, 0.2);
+    /* Dourado suave */
+}
+
+.cover-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cover-label {
+    text-align: center;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* -------------------------------------
+   Colunas 2-6: Cenas (Story Parts Wrapper)
+------------------------------------- */
+.parts-wrapper {
+    /* O wrapper das cenas é virtual no grid pai, 
+       mas aqui aplicamos estilo aos items individuais */
+    display: contents;
+    /* Permite que os filhos sejam grid items do container pai */
+}
+
+/* Se precisar renderizar uma lista dentro do grid, 
+   o componente React precisa retornar o array direto 
+   ou usar display: contents no container intermediário */
+
+
+.part-number {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-weight: 600;
+    text-align: center;
+    margin-top: auto;
+    /* Empurra para o fundo se sobrar espaço */
+}
+
+/* Loading States Styles */
+.part-loading-spinner,
+.cover-loading-icon {
+    font-size: 2rem;
+    color: var(--text-muted);
+    animation: spin 1s linear infinite;
+}
+
+.img-loading-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-top: var(--space-xs);
+}
+
+.img-attempt {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: hsla(var(--primary-hue), 50%, 50%, 0.3);
+    padding: 1px 6px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.05em;
+}
+
+.img-elapsed {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Utility Animations */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    50% {
+        opacity: 0.5;
+    }
+}
