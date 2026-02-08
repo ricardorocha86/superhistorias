@@ -361,11 +361,7 @@ export default function StoryProgress({ storyRequest, onComplete, onCancel }: St
             aria-live="polite"
             aria-label="Gerando história"
         >
-            {/* Timer Global */}
-            <div className="global-timer" aria-label={`Tempo decorrido: ${formatTime(elapsedTime)}`}>
-                <span className="timer-icon" aria-hidden="true">⏱️</span>
-                <span>{formatTime(elapsedTime)}</span>
-            </div>
+
 
             {/* Progress Card */}
             <div className="progress-card">
@@ -422,14 +418,7 @@ export default function StoryProgress({ storyRequest, onComplete, onCancel }: St
                     </span>
                 </div>
 
-                {/* Cancel Button */}
-                <button
-                    className="btn btn-secondary cancel-btn"
-                    onClick={onCancel}
-                    aria-label="Cancelar geração da história"
-                >
-                    Cancelar
-                </button>
+
             </div>
 
             {/* Images Preview Section */}

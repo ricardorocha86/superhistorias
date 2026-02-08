@@ -61,6 +61,24 @@ export default function StoryViewer({ story, onClose }: StoryViewerProps) {
         };
     }, []);
 
+    // Reset scroll to top when page changes
+    useEffect(() => {
+        // Mobile: page-container and book-page scroll
+        const pageContainer = document.querySelector('.page-container');
+        if (pageContainer) {
+            pageContainer.scrollTop = 0;
+        }
+        const bookPage = document.querySelector('.book-page');
+        if (bookPage) {
+            bookPage.scrollTop = 0;
+        }
+        // Desktop: chapter-content-side has its own scroll
+        const chapterContent = document.querySelector('.chapter-content-side');
+        if (chapterContent) {
+            chapterContent.scrollTop = 0;
+        }
+    }, [currentPage]);
+
     const renderFormattedText = (text: string) => {
         if (!text) return null;
 
@@ -90,7 +108,12 @@ export default function StoryViewer({ story, onClose }: StoryViewerProps) {
 
     const renderCoverPage = () => (
         <div className="book-page cover-page-fullscreen">
-            {/* Imagem de fundo fullscreen */}
+            {/* Mobile: Título acima da imagem */}
+            <div className="cover-mobile-header">
+                <h2 className="cover-mobile-title">{story.title}</h2>
+            </div>
+
+            {/* Imagem de fundo fullscreen (desktop) / Imagem normal (mobile) */}
             <div className="cover-fullscreen-bg">
                 {story.images.capa ? (
                     <img
@@ -104,7 +127,7 @@ export default function StoryViewer({ story, onClose }: StoryViewerProps) {
                 )}
             </div>
 
-            {/* Overlay com gradiente escuro na parte inferior */}
+            {/* Desktop: Overlay com gradiente escuro na parte inferior */}
             <div className="cover-overlay">
                 <div className="cover-overlay-content">
                     <h2 className="cover-fullscreen-title">{story.title}</h2>
@@ -128,6 +151,30 @@ export default function StoryViewer({ story, onClose }: StoryViewerProps) {
                             </div>
                         )}
                     </div>
+                </div>
+            </div>
+
+            {/* Mobile: Metadados abaixo da imagem */}
+            <div className="cover-mobile-footer">
+                <div className="cover-mobile-meta">
+                    <div className="meta-row">
+                        <span className="meta-label">Personagens:</span>
+                        <div className="character-badges">
+                            {story.characters.map((char, idx) => (
+                                <span key={idx} className="character-badge">
+                                    {typeof char === 'string' ? char : char.name}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                    {universe && (
+                        <div className="meta-row">
+                            <span className="meta-label">Universo:</span>
+                            <span className="meta-value">
+                                {universe.emoji} {universe.name}
+                            </span>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

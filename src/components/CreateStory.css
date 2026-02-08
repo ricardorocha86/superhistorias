@@ -7,6 +7,18 @@
     animation: slideUp 0.4s ease;
     max-width: 1080px;
     margin: 0 auto;
+    /* Mobile: flex column para empurrar nav para baixo */
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 200px);
+    min-height: calc(100dvh - 200px);
+}
+
+@media (min-width: 768px) {
+    .create-story {
+        display: block;
+        min-height: auto;
+    }
 }
 
 /* Step Indicator */
@@ -133,11 +145,17 @@
 /* Step Content */
 .step-content {
     padding: 0 var(--space-sm);
+    /* Mobile: ocupa espaço disponível e permite scroll */
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
     .step-content {
         padding: 0;
+        flex: none;
+        overflow-y: visible;
     }
 }
 
@@ -343,16 +361,27 @@
     display: flex;
     justify-content: space-between;
     gap: var(--space-md);
-    padding-top: var(--space-lg);
+    padding: var(--space-md) var(--space-sm);
     border-top: 1px solid hsla(var(--primary-hue), 30%, 40%, 0.2);
-    margin-top: var(--space-xl);
     flex-wrap: wrap;
+    /* Mobile: sticky na parte inferior da viewport */
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-darker);
+    z-index: var(--z-sticky);
+    padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom, 0px));
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
     .step-nav {
-        padding-top: var(--space-lg);
+        position: static;
+        padding: var(--space-lg) 0;
         margin-top: var(--space-xl);
+        background: transparent;
+        padding-bottom: var(--space-lg);
+        z-index: auto;
     }
 }
 

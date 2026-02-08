@@ -37,8 +37,6 @@
 
 /* Universe Categories */
 .universe-categories {
-    max-height: calc(100vh - 300px);
-    overflow-y: auto;
     padding: var(--space-md);
     padding-right: var(--space-xs);
     display: flex;
@@ -47,6 +45,13 @@
     background: hsla(var(--primary-hue), 30%, 5%, 0.3);
     border-radius: var(--radius-xl);
     border: 1px solid hsla(var(--primary-hue), 50%, 50%, 0.1);
+}
+
+@media (min-width: 768px) {
+    .universe-categories {
+        max-height: calc(100vh - 300px);
+        overflow-y: auto;
+    }
 }
 
 .universe-category-group {
